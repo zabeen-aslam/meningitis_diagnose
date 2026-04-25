@@ -148,7 +148,10 @@ class ClinicalValidator:
         d = max(scores, key=scores.get)
         return {'diagnosis': d, 'stage': self.get_stage(r),
                 'confidence': scores[d], 'all_scores': scores}
-
+# ── Fix for Railway deployment ────────────────────────────────
+import sys
+sys.modules['__main__'].ClinicalValidator = ClinicalValidator
+# ─────────────────────────────────────────────────────────────
 # ── Load Model ────────────────────────────────────────────────
 bundle = joblib.load('meningitis_model_final.pkl')
 print('✅ Model loaded successfully')
